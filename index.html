@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect with Me</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'GG Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #232428; /* Discord dark theme background */
+            color: #f2f3f5;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            background: #313338; /* Discord chat area background */
+            padding: 40px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            border: 1px solid #1e1f22;
+            margin-bottom: 25px;
+        }
+
+        /* Clickable image buttons */
+        .img-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            outline: none;
+            display: inline-block;
+        }
+
+        .img-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid #5865F2;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto 20px auto;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .username {
+            font-size: 14px;
+            color: #b5bac1;
+            margin-bottom: 20px;
+            font-family: monospace;
+            background: #1e1f22;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        p {
+            font-size: 15px;
+            color: #dbdee1;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+
+        .hint-text {
+            font-size: 12px;
+            color: #949ba4;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .link-btn {
+            display: block;
+            padding: 14px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+            transition: background-color 0.2s ease;
+            text-align: center;
+        }
+
+        .discord-btn {
+            background-color: #5865F2;
+            color: #fff;
+        }
+
+        .discord-btn:hover {
+            background-color: #4752C4;
+        }
+
+        .youtube-btn {
+            background-color: #FF0000;
+            color: #fff;
+        }
+
+        .youtube-btn:hover {
+            background-color: #CC0000;
+        }
+
+        /* Second Meme Banner Preview Box */
+        .gallow-preview-card {
+            background: #2b2d31;
+            border: 1px solid #1e1f22;
+            border-radius: 8px;
+            padding: 12px;
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .gallow-preview-card p {
+            font-size: 13px;
+            color: #949ba4;
+            margin-bottom: 10px;
+        }
+
+        .gallow-thumbnail {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            border: 1px solid #3f4147;
+            display: block;
+        }
+
+        /* Footer Quote Styling */
+        .footer-quote {
+            text-align: center;
+            color: #949ba4;
+            font-size: 14px;
+            font-style: italic;
+            max-width: 400px;
+            line-height: 1.5;
+            border-top: 1px solid #3f4147;
+            padding-top: 15px;
+            width: 100%;
+        }
+
+        .footer-quote span {
+            display: block;
+            margin-top: 5px;
+            font-style: normal;
+            font-weight: 600;
+            color: #b5bac1;
+        }
+
+        /* Modal Overlay Configuration */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+            z-index: 1000;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: #1e1f22; 
+            padding: 16px;
+            border-radius: 8px;
+            width: 95%;
+            max-width: 550px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+            border: 1px solid #313338;
+            text-align: center;
+        }
+
+        .meme-image-container {
+            width: 100%;
+            overflow: hidden;
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #2b2d31;
+            padding: 10px;
+        }
+
+        .meme-image-container img {
+            width: 100%;
+            height: auto;
+            max-height: 65vh;
+            object-fit: contain;
+            display: block;
+        }
+
+        .close-btn {
+            margin-top: 15px;
+            background-color: #4e5058;
+            color: #fff;
+            width: 100%;
+        }
+
+        .close-btn:hover {
+            background-color: #6d6f78;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <button class="img-btn" onclick="openModal('femboyModal')" title="Click for statement">
+            <img src="notafemboy.png" alt="Avatar" class="profile-img">
+        </button>
+        
+        <h1>Let's Connect!</h1>
+        <div class="username">@programmer69</div>
+        
+        <p>Welcome to my corner of the web. Click any image to reveal the hidden lore channels.</p>
+        <div class="hint-text">(Try clicking the profile picture)</div>
+        
+        <div class="links">
+            <a href="https://discord.gg/Q69DubKKMg" target="_blank" class="link-btn discord-btn">
+                Join My Discord Server
+            </a>
+
+            <a href="https://www.youtube.com/@gallowvan" target="_blank" class="link-btn youtube-btn">
+                Subscribe on YouTube
+            </a>
+        </div>
+    </div>
+
+    <div class="gallow-preview-card">
+        <p>📺 Featured Channel Clip</p>
+        <button class="img-btn" onclick="openModal('gallowModal')" title="Click to view full image">
+            <img src="dontbelikethis.png" alt="Gallow YouTube Meme" class="gallow-thumbnail">
+        </button>
+    </div>
+
+    <div class="footer-quote">
+        "I made this website because I couldn't do it on a phone"
+        <span>- g4llow</span>
+    </div>
+
+    <div class="modal-overlay" id="femboyModal" onclick="closeModal('femboyModal')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="meme-image-container">
+                <img src="notafemboy.png" alt="Official Statement">
+            </div>
+            <button class="link-btn close-btn" onclick="closeModal('femboyModal')">Close</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="gallowModal" onclick="closeModal('gallowModal')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="meme-image-container">
+                <img src="dontbelikethis.png" alt="YouTube Lore Details">
+            </div>
+            <button class="link-btn close-btn" onclick="closeModal('gallowModal')">Close</button>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+    </script>
+
+</body>
+</html>
